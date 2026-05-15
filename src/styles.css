@@ -13,13 +13,13 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0.06 255);
 
-  --primary: oklch(54.287% 0.21506 259.451); 
+  --primary: oklch(41.449% 0.15998 258.921);  
   --primary-foreground: oklch(0.98 0.01 255);
 
   --secondary: oklch(0.94 0.02 255); 
   --secondary-foreground: oklch(0.35 0.08 255);
 
-  --accent: oklch(54.287% 0.21506 259.451); 
+  --accent: oklch(41.449% 0.15998 258.921); 
   --accent-foreground: oklch(0.99 0.01 255);
 
   --muted: oklch(0.96 0.01 255);
@@ -104,17 +104,14 @@ body {
 @layer base {
   h1 {
     @apply text-3xl font-extrabold tracking-tight sm:text-3xl lg:text-3xl;
-    color: var(--primary);
   }
 
   h2 {
     @apply text-2xl font-bold tracking-tight mt-10 mb-6;
-    color: var(--foreground);
   }
 
   h3 {
     @apply text-xl font-bold tracking-normal;
-    color: var(--foreground);
   }
 
   h4 {
