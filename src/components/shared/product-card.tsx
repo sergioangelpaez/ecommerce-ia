@@ -9,7 +9,7 @@ export const ProductCard = () => {
 				className="object-contain aspect-4/3"
 			/>
 			<div className="flex flex-col gap-3">
-				<p className="text-muted-foreground text-sm font-medium">Categoria</p>
+				<p className="text-muted text-sm font-medium">Categoria</p>
 				<div className="flex flex-col">
 					<h3>Nombre del producto</h3>
 					<p className="text-accent font-bold">$1.234</p>
