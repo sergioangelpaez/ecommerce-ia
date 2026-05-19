@@ -1,35 +1,50 @@
 import { Link } from "@tanstack/react-router";
-import { Search, ShoppingCartIcon } from "lucide-react";
+import { MoonIcon, Search, ShoppingCartIcon, SunIcon } from "lucide-react";
+import { useTheme } from "#/hooks/use-theme";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export const NavigationToolbar = () => {
+	const { theme, toggleTheme } = useTheme();
 	return (
 		<div className="flex gap-5 items-center justify-center">
 			<Tooltip>
-				<TooltipTrigger asChild>
+				<TooltipTrigger
+					asChild
+					className="text-foreground"
+					onClick={() => toggleTheme()}
+				>
+					<Link to="/">{theme === "light" ? <SunIcon /> : <MoonIcon />}</Link>
+				</TooltipTrigger>
+				<TooltipContent>
+					<p>Toggle Theme</p>
+				</TooltipContent>
+			</Tooltip>
+
+			<Tooltip>
+				<TooltipTrigger asChild className="text-foreground">
 					<Link to="/">
 						<Search className="size-6" />
 					</Link>
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Buscar</p>
+					<p>Search</p>
 				</TooltipContent>
 			</Tooltip>
 
 			<Tooltip>
-				<TooltipTrigger asChild>
+				<TooltipTrigger asChild className="text-foreground">
 					<Link to="/">
 						<ShoppingCartIcon className="size-6" />
 					</Link>
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Ir al carrito</p>
+					<p>Go to cart</p>
 				</TooltipContent>
 			</Tooltip>
 
-			<Button size="lg" className="cursor-pointer">
-				Compra con IA
+			<Button size="lg" className="cursor-pointer text-white">
+				Shop with AI
 			</Button>
 		</div>
 	);

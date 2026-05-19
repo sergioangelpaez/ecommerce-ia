@@ -12,16 +12,16 @@ export const UserNavigationMenu = () => {
 			<NavigationMenuList className="flex gap-5">
 				<NavigationMenuItem>
 					<NavigationMenuLink asChild className="nav-menu-item">
-						<Link to="/">Inicio</Link>
+						<Link to="/">Home</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<NavigationMenuItem>
 					<NavigationMenuLink asChild className="nav-menu-item">
-						<Link to="/">Productos</Link>
+						<Link to="/">Products</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<NavigationMenuLink asChild className="nav-menu-item">
-					<Link to="/">Acerca de este proyecto</Link>
+					<Link to="/">About this project</Link>
 				</NavigationMenuLink>
 			</NavigationMenuList>
 		</NavigationMenu>

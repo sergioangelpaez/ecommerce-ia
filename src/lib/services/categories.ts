@@ -1,5 +1,7 @@
-export const getAllCategories = async (): Promise<Category[]> => {
-	const res = await fetch("https://api.escuelajs.co/api/v1/categories");
+export const getAllCategories = async (): Promise<CategoryApiResponse> => {
+	const res = await fetch(
+		"https://fakestoreapiserver.reactbd.org/api/categories",
+	);
 	if (!res.ok) throw new Error("Error al obtener categorias");
 	return res.json();
 };

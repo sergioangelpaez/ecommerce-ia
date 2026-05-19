@@ -4,22 +4,20 @@ import { Card } from "../ui/card";
 
 export const CategoryCard = ({ category }: { category: Category }) => {
 	return (
-		<Card className="p-6 bg-card flex flex-col h-100 overflow-hidden">
-			<div className="flex flex-col gap-3">
-				<h3>{category.name}</h3>
+		<Card className="p-6 bg-card flex flex-col h-70 overflow-hidden">
+			<div className="flex flex-col h-full items-between justify-between gap-3">
+				<div className="flex flex-col gap-3">
+					<h3>{category.name}</h3>
+					<p className="text-muted line-clamp-3">{category.description}</p>
+				</div>
 				<Link
 					to="/"
-					className="text-xs text-accent font-medium flex gap-3 items-center"
+					className="text-xs text-accent font-medium flex gap-3 items-center pb-10"
 				>
-					View all products
+					View all {category.name} products
 					<ChevronRight className="size-4" />
 				</Link>
 			</div>
-			<img
-				src={category.image}
-				alt=""
-				className="object-contain w-full flex-1 min-h-0"
-			/>
 		</Card>
 	);
 };

@@ -1,14 +1,7 @@
-import {
-	ArrowLeftCircle,
-	ArrowRightCircle,
-	CloudAlert,
-	LoaderCircle,
-	XIcon,
-} from "lucide-react";
+import { ArrowLeftCircle, ArrowRightCircle, CloudAlert } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useCategories } from "#/hooks/categories/use-categories";
 import { CategoryCard } from "../shared/category-card";
-import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
 import {
 	Carousel,
@@ -18,7 +11,6 @@ import {
 } from "../ui/carousel";
 import {
 	Empty,
-	EmptyContent,
 	EmptyDescription,
 	EmptyHeader,
 	EmptyMedia,
@@ -41,7 +33,7 @@ export const CategoriesCarousel = () => {
 		return (
 			<div className="flex flex-col gap-5">
 				<div className="w-full flex justify-between items-center">
-					<h1>Compra por Categorías</h1>
+					<h1>Shop By Category</h1>
 				</div>
 				<Carousel className="w-full">
 					<CarouselContent>
@@ -72,7 +64,7 @@ export const CategoriesCarousel = () => {
 		);
 	}
 
-	if (isCategoriesError) {
+	if (isCategoriesError || !categories) {
 		return (
 			<div className="flex flex-col gap-5">
 				<Card>
@@ -82,15 +74,12 @@ export const CategoriesCarousel = () => {
 								<EmptyMedia variant="icon">
 									<CloudAlert />
 								</EmptyMedia>
-								<EmptyTitle>Ocurrió un error</EmptyTitle>
+								<EmptyTitle>Oops!</EmptyTitle>
 								<EmptyDescription>
-									Hubo un error al obtener la información de las categorías.
-									Intenta más tarde o recarga las categorías.
+									There was an error fetching the categories information. Please
+									try reloading the page.
 								</EmptyDescription>
 							</EmptyHeader>
-							<EmptyContent>
-								<Button>Recargar categorías</Button>
-							</EmptyContent>
 						</Empty>
 					</CardContent>
 				</Card>
@@ -101,7 +90,7 @@ export const CategoriesCarousel = () => {
 	return (
 		<div className="flex flex-col gap-5">
 			<div className="w-full flex justify-between items-center">
-				<h1>Compra por Categorías</h1>
+				<h1>Shop By Category</h1>
 				<div className="flex gap-3 text-accent">
 					<ArrowLeftCircle className="cursor-pointer" onClick={scrollPrev} />
 					<ArrowRightCircle className="cursor-pointer" onClick={scrollNext} />
@@ -110,7 +99,7 @@ export const CategoriesCarousel = () => {
 
 			<Carousel setApi={setApi} className="w-full">
 				<CarouselContent>
-					{categories?.map((category) => (
+					{categories.map((category) => (
 						<CarouselItem
 							key={category.id}
 							className="basis-1/2 md:basis-1/3 lg:basis-1/4"

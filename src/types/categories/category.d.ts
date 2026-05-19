@@ -1,6 +1,10 @@
 interface Category {
 	id: number;
 	name: string;
-	slug: string;
-	image: string;
+	description: string;
+	parenId: number | null;
+}
+
+interface CategoryApiResponse extends ApiResponse<Category> {
+	totalCategories: number;
 }
