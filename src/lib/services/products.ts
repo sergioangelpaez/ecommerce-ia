@@ -72,3 +72,14 @@ export const getMaxProductPrice = async (): Promise<number> => {
 	if (error) throw new Error(error.message);
 	return data.price;
 };
+
+export const getProductById = async (productId: string) => {
+	const { data, error } = await supabase
+		.from("products")
+		.select("*")
+		.eq("id", productId)
+		.single();
+
+	if (error) throw new Error(error.message);
+	return data;
+};

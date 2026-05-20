@@ -48,7 +48,7 @@ export const ProductsCatalog = ({ filters }: ProductsCatalogProps) => {
 	}
 
 	return (
-		<div className="grid grid-cols-3 gap-5">
+		<div className="grid grid-cols-2 xl:grid-cols-3 gap-5">
 			{products.map((product) => (
 				<ProductCard product={product as Tables<"products">} key={product.id} />
 			))}

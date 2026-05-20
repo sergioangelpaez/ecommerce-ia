@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { CloudAlert } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFeaturedProducts } from "#/hooks/products/use-featured-products";
@@ -44,7 +45,7 @@ export const FeaturedProducts = () => {
 		return (
 			<div className="flex flex-col gap-5">
 				<div className="w-full flex justify-between items-center">
-					<h1>Featured Products</h1>
+					<h1>Productos Recomendados</h1>
 				</div>
 				<Carousel className="w-full">
 					<CarouselContent>
@@ -65,22 +66,7 @@ export const FeaturedProducts = () => {
 	if (isProductsError || !featuredProducts) {
 		return (
 			<div className="flex flex-col gap-5">
-				<Card>
-					<CardContent>
-						<Empty>
-							<EmptyHeader>
-								<EmptyMedia variant="icon">
-									<CloudAlert />
-								</EmptyMedia>
-								<EmptyTitle>Oops!</EmptyTitle>
-								<EmptyDescription>
-									There was an error fetching the products information. Please
-									try reloading the page.
-								</EmptyDescription>
-							</EmptyHeader>
-						</Empty>
-					</CardContent>
-				</Card>
+				<ProductCardSkeleton />
 			</div>
 		);
 	}
@@ -92,8 +78,10 @@ export const FeaturedProducts = () => {
 	return (
 		<div className="flex flex-col gap-5">
 			<div className="w-full flex justify-between">
-				<h1>Featured Products</h1>
-				<Button size="lg">See All Products</Button>
+				<h1>Productos Recomendados</h1>
+				<Button size="lg">
+					<Link to="/catalog">Ver todos los productos</Link>
+				</Button>
 			</div>
 
 			<div className="grid grid-cols-3 xl:grid-cols-5 gap-5">

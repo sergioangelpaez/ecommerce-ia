@@ -38,7 +38,7 @@ export const CategoryCard = ({
 							"w-full sm:w-fit mt-auto justify-center gap-2 font-semibold shadow-md",
 					})}
 				>
-					View all products
+					Ver todos los productos
 					<ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
 				</Link>
 			</div>

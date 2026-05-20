@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button";
 import { Card, CardContent } from "#/components/ui/card";
 
@@ -8,20 +9,23 @@ export const HeroBanner = () => {
 				<div className="flex flex-col gap-10 justify-center">
 					<div className="flex gap-5 flex-col">
 						<h1 className="text-4xl text-white">
-							Experience The Best Possible Audio
+							Experimenta el Mejor Audio Posible
 						</h1>
 						<p className="text-white">
-							Morbi justo sem, venenatis sit amet tortor id, porttitor facilisis
-							metus. Ut scelerisque mauris. Vivamus fringilla elit eu felis
-							iaculis cursus. Integer ullamcorper libero vel orci tristique, in
-							ullamcorper est luctus. Ligula felis. Proin interdum velit quam,
-							ut iaculis ipsum tempor nec...
+							Experimenta la verdadera libertad del sonido con nuestros
+							audífonos inalámbricos premium. Disfruta de una acústica
+							cristalina, cancelación de ruido avanzada y un diseño ergonómico
+							pensado para acompañarte todo el día con el máximo confort. Dale a
+							tus oídos la calidad que se merecen y lleva tu música al siguiente
+							nivel.
 						</p>
 					</div>
 					<div className="flex gap-5">
-						<Button variant="secondary">Shop Now</Button>
+						<Button variant="secondary">
+							<Link to="/catalog">Comprar ahora</Link>
+						</Button>
 						<Button variant="outline" className="text-white">
-							Learn More
+							<Link to="/">Comprar ahora</Link>
 						</Button>
 					</div>
 				</div>

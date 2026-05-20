@@ -36,9 +36,11 @@ export const ProductCard = ({ product }: { product: Tables<"products"> }) => {
 
 						<div className="flex gap-3 items-center">
 							<p className="text-accent font-bold">${product.price}</p>
-							<p className="text-muted text-sm font-bold line-through">
-								${product.compare_price}
-							</p>
+							{product.compare_price && (
+								<p className="text-muted text-sm font-bold line-through">
+									${product.compare_price}
+								</p>
+							)}
 						</div>
 					</div>
 
@@ -50,10 +52,11 @@ export const ProductCard = ({ product }: { product: Tables<"products"> }) => {
 									"w-full sm:w-fit mt-auto justify-center gap-2 font-semibold",
 							})}
 						>
-							View all products
+							Agregar al carrito
 						</Link>
 						<Link
-							to="/"
+							to="/product/$productId"
+							params={{ productId: product.id }}
 							className={buttonVariants({
 								variant: "link",
 							})}

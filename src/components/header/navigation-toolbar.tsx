@@ -17,7 +17,7 @@ export const NavigationToolbar = () => {
 					{theme === "light" ? <MoonIcon /> : <SunIcon />}
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Toggle Theme</p>
+					<p>Cambiar el tema</p>
 				</TooltipContent>
 			</Tooltip>
 
@@ -28,7 +28,7 @@ export const NavigationToolbar = () => {
 					</Link>
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Search</p>
+					<p>Buscar</p>
 				</TooltipContent>
 			</Tooltip>
 
@@ -39,12 +39,12 @@ export const NavigationToolbar = () => {
 					</Link>
 				</TooltipTrigger>
 				<TooltipContent>
-					<p>Go to cart</p>
+					<p>Ir al carrito</p>
 				</TooltipContent>
 			</Tooltip>
 
 			<Button size="lg" className="cursor-pointer text-white">
-				Shop with AI
+				Compra con IA
 			</Button>
 		</div>
 	);

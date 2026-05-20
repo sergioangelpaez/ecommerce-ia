@@ -17,7 +17,7 @@ function RouteComponent() {
 				setFilter={setFilter}
 				resetFilters={resetFilters}
 			/>
-			<main className="pr-2 custom-scrollbar">
+			<main className="custom-scrollbar">
 				<ProductsCatalog filters={filters} />
 			</main>
 		</div>

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
 import { Route as LayoutCatalogRouteImport } from './routes/_layout/catalog'
+import { Route as LayoutProductProductIdIndexRouteImport } from './routes/_layout/product.$productId/index'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -27,27 +28,41 @@ const LayoutCatalogRoute = LayoutCatalogRouteImport.update({
   path: '/catalog',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutProductProductIdIndexRoute =
+  LayoutProductProductIdIndexRouteImport.update({
+    id: '/product/$productId/',
+    path: '/product/$productId/',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/catalog': typeof LayoutCatalogRoute
+  '/product/$productId/': typeof LayoutProductProductIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/catalog': typeof LayoutCatalogRoute
   '/': typeof LayoutIndexRoute
+  '/product/$productId': typeof LayoutProductProductIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/catalog': typeof LayoutCatalogRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/product/$productId/': typeof LayoutProductProductIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalog'
+  fullPaths: '/' | '/catalog' | '/product/$productId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/catalog' | '/'
-  id: '__root__' | '/_layout' | '/_layout/catalog' | '/_layout/'
+  to: '/catalog' | '/' | '/product/$productId'
+  id:
+    | '__root__'
+    | '/_layout'
+    | '/_layout/catalog'
+    | '/_layout/'
+    | '/_layout/product/$productId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,17 +92,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutCatalogRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/product/$productId/': {
+      id: '/_layout/product/$productId/'
+      path: '/product/$productId'
+      fullPath: '/product/$productId/'
+      preLoaderRoute: typeof LayoutProductProductIdIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
   LayoutCatalogRoute: typeof LayoutCatalogRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutProductProductIdIndexRoute: typeof LayoutProductProductIdIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCatalogRoute: LayoutCatalogRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutProductProductIdIndexRoute: LayoutProductProductIdIndexRoute,
 }
 
 const LayoutRouteWithChildren =
