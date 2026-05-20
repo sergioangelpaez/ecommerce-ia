@@ -1,8 +1,11 @@
-import type { FilterState } from "#/hooks/products/use-products-filter";
-import { supabase } from "./supabase";
+import { supabase } from "#/lib/services/supabase";
+import type { FilterState } from "./use-products-filter";
 
 export const getAllProducts = async (filters: FilterState) => {
-	let query = supabase.from("products").select("*").eq("is_active", true);
+	let query = supabase
+		.from("products_with_rating")
+		.select("*")
+		.eq("is_active", true);
 
 	if (filters.search.trim()) {
 		query = query.ilike("name", `%${filters.search.trim()}%`);
@@ -46,29 +49,4 @@ export const getAllProducts = async (filters: FilterState) => {
 	const { data, error } = await query;
 	if (error) throw new Error(error.message);
 	return data;
-};
-
-export const getProductBrands = async (): Promise<string[]> => {
-	const { data, error } = await supabase
-		.from("products")
-		.select("brand")
-		.eq("is_active", true)
-		.not("brand", "is", null);
-
-	if (error) throw new Error(error.message);
-
-	return [...new Set(data.map((p) => p.brand as string))].sort();
-};
-
-export const getMaxProductPrice = async (): Promise<number> => {
-	const { data, error } = await supabase
-		.from("products")
-		.select("price")
-		.eq("is_active", true)
-		.order("price", { ascending: false })
-		.limit(1)
-		.single();
-
-	if (error) throw new Error(error.message);
-	return data.price;
 };
