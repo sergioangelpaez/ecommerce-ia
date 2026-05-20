@@ -1,7 +1,8 @@
-export const getAllCategories = async (): Promise<CategoryApiResponse> => {
-	const res = await fetch(
-		"https://fakestoreapiserver.reactbd.org/api/categories",
-	);
-	if (!res.ok) throw new Error("Error al obtener categorias");
-	return res.json();
+import { supabase } from "./supabase";
+
+export const getAllCategories = async () => {
+	const response = await supabase.from("categories").select();
+
+	if (response.error) throw new Error(response.error.message);
+	return response.data;
 };

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutProductsRouteImport } from './routes/_layout/products'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -21,24 +22,32 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutProductsRoute = LayoutProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => LayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
+  '/products': typeof LayoutProductsRoute
 }
 export interface FileRoutesByTo {
+  '/products': typeof LayoutProductsRoute
   '/': typeof LayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/products': typeof LayoutProductsRoute
   '/_layout/': typeof LayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/products'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_layout' | '/_layout/'
+  to: '/products' | '/'
+  id: '__root__' | '/_layout' | '/_layout/products' | '/_layout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -61,14 +70,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/products': {
+      id: '/_layout/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof LayoutProductsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
 interface LayoutRouteChildren {
+  LayoutProductsRoute: typeof LayoutProductsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutProductsRoute: LayoutProductsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
 }
 

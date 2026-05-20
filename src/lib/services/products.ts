@@ -1,7 +1,8 @@
-export const getAllProducts = async (): Promise<ProductApiResponse> => {
-	const res = await fetch(
-		"https://fakestoreapiserver.reactbd.org/api/products",
-	);
-	if (!res.ok) throw new Error("Error al obtener productos");
-	return res.json();
+import { supabase } from "./supabase";
+
+export const getAllProducts = async () => {
+	const response = await supabase.from("products").select();
+
+	if (response.error) throw new Error(response.error.message);
+	return response.data;
 };

@@ -3,9 +3,8 @@ import { getAllProducts } from "#/lib/services/products";
 
 export const useProducts = () => {
 	const { data, isLoading, isError } = useQuery({
-		queryKey: ["get-all-products"],
-		queryFn: async () => await getAllProducts(),
-		select: (data) => data.data,
+		queryKey: ["products", "all"],
+		queryFn: getAllProducts,
 	});
 
 	return { data, isLoading, isError };

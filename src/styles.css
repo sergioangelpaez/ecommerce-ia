@@ -49,7 +49,7 @@
 
   --border: oklch(0.25 0.05 255);
 
-  --destrcutive: oklch(0.25 0.05 255);
+  --destructive: oklch(0.25 0.05 255);
 }
 
 @theme inline {
@@ -101,6 +101,15 @@ body,
 body {
   margin: 0;
   background-color: var(--background);
+}
+
+.nav-menu-item {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.nav-menu-item:hover, .nav-menu-item:focus {
+  color: white;
 }
 
 @layer base {

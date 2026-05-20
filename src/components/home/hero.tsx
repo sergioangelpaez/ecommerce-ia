@@ -19,7 +19,7 @@ export const HeroBanner = () => {
 						</p>
 					</div>
 					<div className="flex gap-5">
-						<Button className="bg-background">Shop Now</Button>
+						<Button variant="secondary">Shop Now</Button>
 						<Button variant="outline" className="text-white">
 							Learn More
 						</Button>

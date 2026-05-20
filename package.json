@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
+    "@supabase/supabase-js": "^2.106.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/match-sorter-utils": "latest",
     "@tanstack/react-devtools": "latest",
@@ -37,6 +38,7 @@
     "radix-ui": "^1.4.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "supabase": "^2.100.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.1.18",
     "tw-animate-css": "^1.3.6",
