@@ -17,7 +17,7 @@ export const UserNavigationMenu = () => {
 				</NavigationMenuItem>
 				<NavigationMenuItem>
 					<NavigationMenuLink asChild className="nav-menu-item">
-						<Link to="/products">Products</Link>
+						<Link to="/catalog">Catalog</Link>
 					</NavigationMenuLink>
 				</NavigationMenuItem>
 				<NavigationMenuLink asChild className="nav-menu-item">

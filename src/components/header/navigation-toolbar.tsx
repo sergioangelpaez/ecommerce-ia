@@ -14,7 +14,7 @@ export const NavigationToolbar = () => {
 					className="text-foreground"
 					onClick={() => toggleTheme()}
 				>
-					<Link to="/">{theme === "light" ? <SunIcon /> : <MoonIcon />}</Link>
+					{theme === "light" ? <MoonIcon /> : <SunIcon />}
 				</TooltipTrigger>
 				<TooltipContent>
 					<p>Toggle Theme</p>
