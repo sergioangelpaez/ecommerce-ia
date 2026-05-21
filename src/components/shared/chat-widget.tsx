@@ -221,7 +221,7 @@ function ProductMiniCard({
 
 	return (
 		<a
-			href={`/productos/${product.slug}`}
+			href={`/product/${product.id}`}
 			style={{
 				display: "flex",
 				alignItems: "center",
