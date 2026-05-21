@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { MoonIcon, Search, ShoppingCartIcon, SunIcon } from "lucide-react";
-import { useTheme } from "#/hooks/use-theme";
+import { useTheme } from "#/context/theme-context";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
