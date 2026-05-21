@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutCheckoutRouteImport } from './routes/_layout/checkout'
 import { Route as LayoutCatalogRouteImport } from './routes/_layout/catalog'
 import { Route as LayoutProductProductIdIndexRouteImport } from './routes/_layout/product.$productId/index'
 
@@ -21,6 +22,11 @@ const LayoutRoute = LayoutRouteImport.update({
 const LayoutIndexRoute = LayoutIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+const LayoutCheckoutRoute = LayoutCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutCatalogRoute = LayoutCatalogRouteImport.update({
@@ -38,10 +44,12 @@ const LayoutProductProductIdIndexRoute =
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
   '/catalog': typeof LayoutCatalogRoute
+  '/checkout': typeof LayoutCheckoutRoute
   '/product/$productId/': typeof LayoutProductProductIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/catalog': typeof LayoutCatalogRoute
+  '/checkout': typeof LayoutCheckoutRoute
   '/': typeof LayoutIndexRoute
   '/product/$productId': typeof LayoutProductProductIdIndexRoute
 }
@@ -49,18 +57,20 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/catalog': typeof LayoutCatalogRoute
+  '/_layout/checkout': typeof LayoutCheckoutRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/product/$productId/': typeof LayoutProductProductIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/catalog' | '/product/$productId/'
+  fullPaths: '/' | '/catalog' | '/checkout' | '/product/$productId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/catalog' | '/' | '/product/$productId'
+  to: '/catalog' | '/checkout' | '/' | '/product/$productId'
   id:
     | '__root__'
     | '/_layout'
     | '/_layout/catalog'
+    | '/_layout/checkout'
     | '/_layout/'
     | '/_layout/product/$productId/'
   fileRoutesById: FileRoutesById
@@ -85,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/checkout': {
+      id: '/_layout/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof LayoutCheckoutRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/catalog': {
       id: '/_layout/catalog'
       path: '/catalog'
@@ -104,12 +121,14 @@ declare module '@tanstack/react-router' {
 
 interface LayoutRouteChildren {
   LayoutCatalogRoute: typeof LayoutCatalogRoute
+  LayoutCheckoutRoute: typeof LayoutCheckoutRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutProductProductIdIndexRoute: typeof LayoutProductProductIdIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutCatalogRoute: LayoutCatalogRoute,
+  LayoutCheckoutRoute: LayoutCheckoutRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutProductProductIdIndexRoute: LayoutProductProductIdIndexRoute,
 }

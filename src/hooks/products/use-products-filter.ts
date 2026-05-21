@@ -1,4 +1,6 @@
-import { useCallback, useState } from "react";
+import { useNavigate, useSearch } from "@tanstack/react-router";
+import { useCallback } from "react";
+import { Route } from "#/routes/_layout/catalog";
 
 export interface FilterState {
 	search: string;
@@ -21,18 +23,28 @@ export const initialFilters: FilterState = {
 };
 
 export const useProductsFilter = () => {
-	const [filters, setFilters] = useState<FilterState>(initialFilters);
+	const navigate = Route.useNavigate();
+	const currentSearch = useSearch({ from: "/_layout/catalog" });
+
+	const filters = { ...initialFilters, ...currentSearch } as FilterState;
 
 	const setFilter = useCallback(
 		<K extends keyof FilterState>(key: K, value: FilterState[K]) => {
-			setFilters((prev) => ({ ...prev, [key]: value }));
+			navigate({
+				search: (prev) => ({
+					...prev,
+					[key]: value,
+				}),
+			});
 		},
-		[],
+		[navigate],
 	);
 
 	const resetFilters = useCallback(() => {
-		setFilters(initialFilters);
-	}, []);
+		navigate({
+			search: initialFilters,
+		});
+	}, [navigate]);
 
 	return { filters, setFilter, resetFilters };
 };

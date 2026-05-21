@@ -28,6 +28,8 @@
   --input: oklch(0.92 0.02 255);
   --ring: oklch(0.58 0.18 250);
 
+  --destructive: oklch(52.951% 0.2052 28.024);
+
   --radius: 0.75rem;
 }
 
@@ -49,7 +51,7 @@
 
   --border: oklch(0.25 0.05 255);
 
-  --destructive: oklch(0.25 0.05 255);
+  --destructive: oklch(52.951% 0.2052 28.024);
 }
 
 @theme inline {
@@ -124,6 +126,7 @@ body {
 
   h3 {
     @apply text-xl font-bold tracking-normal;
+    color: var(--foreground)
   }
 
   h4 {

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ProductDetailCard } from "#/components/shared/product-detail-card";
 import { useProduct } from "#/hooks/products/use-product";
 
@@ -20,7 +20,7 @@ function RouteComponent() {
 				to="/catalog"
 				className="flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors w-fit group"
 			>
-				<ChevronLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+				<ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
 				<span>Volver al catálogo</span>
 			</Link>
 

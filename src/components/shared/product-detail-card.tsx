@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Badge } from "#/components/ui/badge";
 import { Button } from "#/components/ui/button";
 import { Separator } from "#/components/ui/separator";
+import { useCart } from "#/context/cart-context"; // Importamos tu hook
 
 interface ProductDetailViewProps {
 	product: {
@@ -21,6 +22,8 @@ interface ProductDetailViewProps {
 }
 
 export function ProductDetailCard({ product }: ProductDetailViewProps) {
+	const { cart, updateQuantity, addToCart } = useCart(); // Traemos el contexto
+
 	const allImages =
 		product.images && product.images.length > 0
 			? product.images
@@ -28,6 +31,10 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 
 	const [mainImage, setMainImage] = useState(allImages[0]);
 	const [quantity, setQuantity] = useState(1);
+
+	// Buscamos si ya existe en el carrito para validar topes de stock
+	const cartItem = cart.find((item) => item.id === product.id);
+	const quantityInCart = cartItem ? cartItem.quantity : 0;
 
 	const hasDiscount =
 		product.compare_price != null &&
@@ -42,6 +49,29 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 		: 0;
 
 	const isOutOfStock = product.stock <= 0;
+
+	// Manejador para añadir la cantidad seleccionada al carrito
+	const handleAddToCart = () => {
+		if (isOutOfStock) return;
+
+		if (quantityInCart > 0) {
+			// Si ya existe, actualizamos sumando la cantidad actual respetando el stock
+			const nextQuantity = Math.min(product.stock, quantityInCart + quantity);
+			updateQuantity(product.id, nextQuantity);
+		} else {
+			// Si es nuevo, lo añadimos con la cantidad del contador local.
+			// Modificamos temporalmente addToCart en lote o usamos updateQuantity justo después
+			addToCart({
+				id: product.id,
+				name: product.name,
+				price: product.price,
+				image: product.image_url ?? undefined,
+			});
+			if (quantity > 1) {
+				updateQuantity(product.id, quantity);
+			}
+		}
+	};
 
 	return (
 		<main className="flex flex-col gap-12">
@@ -159,13 +189,20 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 										size="icon"
 										className="text-muted h-9 w-9 rounded-none border-l border-input"
 										onClick={() =>
-											setQuantity((q) => Math.min(product.stock, q + 1))
+											setQuantity((q) =>
+												Math.min(product.stock - quantityInCart, q + 1),
+											)
 										}
-										disabled={quantity >= product.stock}
+										disabled={quantity >= product.stock - quantityInCart}
 									>
 										<Plus className="h-3.5 w-3.5" />
 									</Button>
 								</div>
+								{quantityInCart > 0 && (
+									<span className="text-xs text-blue-500 font-medium">
+										({quantityInCart} ya en el carrito)
+									</span>
+								)}
 							</div>
 						)}
 					</div>
@@ -173,17 +210,22 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 					{/* CTA */}
 					<Button
 						size="lg"
-						disabled={isOutOfStock}
-						className="w-full gap-2 font-semibold"
+						disabled={isOutOfStock || quantityInCart >= product.stock}
+						className="w-full gap-2 font-semibold bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
+						onClick={handleAddToCart}
 					>
 						<ShoppingCart className="h-5 w-5" />
-						{isOutOfStock ? "Sin stock" : "Añadir al carrito"}
+						{isOutOfStock
+							? "Sin stock"
+							: quantityInCart >= product.stock
+								? "Límite de stock alcanzado"
+								: "Añadir al carrito"}
 					</Button>
 
 					{/* Beneficios */}
 					<div className="flex flex-col gap-3 rounded-xl border border-border bg-muted/20 p-4">
 						<div className="flex items-start gap-3 text-xs text-muted-foreground">
-							<Truck className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+							<Truck className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
 							<div>
 								<p className="font-semibold text-foreground">
 									Envío a todo el país
@@ -195,7 +237,7 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 						</div>
 						<Separator />
 						<div className="flex items-start gap-3 text-xs text-muted-foreground">
-							<ShieldCheck className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+							<ShieldCheck className="h-4 w-4 text-blue-600 shrink-0 mt-0.5" />
 							<div>
 								<p className="font-semibold text-foreground">
 									Compra Garantizada
