@@ -406,7 +406,7 @@ function MessageBubble({
 
 			{message.action?.type === "navigate" && (
 				<ActionButton
-					slug={message.action.slug}
+					id={message.action.slug}
 					label={message.action.label}
 					t={t}
 				/>
