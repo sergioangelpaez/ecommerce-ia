@@ -4,6 +4,7 @@
 // <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useTheme } from "#/context/theme-context";
 import { type Message, useChat } from "../../hooks/use-chat";
@@ -153,11 +154,11 @@ function getTokens(dark: boolean) {
 // ─── ActionButton ─────────────────────────────────────────────────────────────
 
 function ActionButton({
-	slug,
+	id,
 	label,
 	t,
 }: {
-	slug: string;
+	id: string;
 	label: string;
 	t: ReturnType<typeof getTokens>;
 }) {
@@ -166,7 +167,12 @@ function ActionButton({
 		<div style={{ paddingLeft: 36 }}>
 			<button
 				type="button"
-				onClick={() => navigate({ to: "/productos/$slug", params: { slug } })}
+				onClick={() =>
+					navigate({
+						to: "/product/$productId",
+						params: { productId: id },
+					})
+				}
 				style={{
 					background: t.actionBg,
 					border: "none",
