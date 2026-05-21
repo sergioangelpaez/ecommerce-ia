@@ -3,7 +3,6 @@ import { MoonIcon, Search, SunIcon } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "#/context/theme-context";
 import { CartDrawer } from "../cart/cart-drawer";
-import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export const NavigationToolbar = () => {
