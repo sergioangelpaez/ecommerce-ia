@@ -33,7 +33,7 @@ export const CategoriesCarousel = () => {
 		return (
 			<div className="flex flex-col gap-5">
 				<div className="w-full flex justify-between items-center">
-					<h1>Shop By Category</h1>
+					<h1>Compra Por Categoría</h1>
 				</div>
 				<Carousel className="w-full">
 					<CarouselContent>
@@ -90,7 +90,7 @@ export const CategoriesCarousel = () => {
 	return (
 		<div className="flex flex-col gap-5">
 			<div className="w-full flex justify-between items-center">
-				<h1>Shop By Category</h1>
+				<h1>Compra Por Categoría</h1>
 				<div className="flex gap-3 text-accent">
 					<ArrowLeftCircle className="cursor-pointer" onClick={scrollPrev} />
 					<ArrowRightCircle className="cursor-pointer" onClick={scrollNext} />

@@ -32,13 +32,14 @@ export const CategoryCard = ({
 				</div>
 
 				<Link
-					to="/"
+					to="/catalog"
+					search={{ categoryIds: [category.id] }}
 					className={buttonVariants({
 						className:
 							"w-full sm:w-fit mt-auto justify-center gap-2 font-semibold shadow-md",
 					})}
 				>
-					Ver todos los productos
+					Ir a {category.name}
 					<ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
 				</Link>
 			</div>
