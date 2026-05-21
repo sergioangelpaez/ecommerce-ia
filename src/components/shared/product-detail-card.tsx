@@ -67,23 +67,11 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 
 					{allImages.length > 1 && (
 						<div className="flex gap-3 overflow-x-auto pb-2">
-							{allImages.map((img, index) => (
-								<button
-									key={index}
-									onClick={() => setMainImage(img)}
-									className={`relative aspect-square w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
-										mainImage === img
-											? "border-primary shadow-sm"
-											: "border-border hover:border-muted-foreground/50"
-									}`}
-								>
-									<img
-										src={img}
-										alt={`${product.name} - vista ${index + 1}`}
-										className="h-full w-full object-cover"
-									/>
-								</button>
-							))}
+							<img
+								src={product.image_url ?? ""}
+								alt={product.description ?? ""}
+								className="h-full w-full object-cover"
+							/>
 						</div>
 					)}
 				</section>
@@ -157,19 +145,19 @@ export function ProductDetailCard({ product }: ProductDetailViewProps) {
 									<Button
 										variant="ghost"
 										size="icon"
-										className="h-9 w-9 rounded-none border-r border-input"
+										className="text-muted h-9 w-9 rounded-none border-r border-input"
 										onClick={() => setQuantity((q) => Math.max(1, q - 1))}
 										disabled={quantity <= 1}
 									>
 										<Minus className="h-3.5 w-3.5" />
 									</Button>
-									<span className="w-10 text-center font-semibold text-sm">
+									<span className="w-10 text-center font-semibold text-muted text-sm">
 										{quantity}
 									</span>
 									<Button
 										variant="ghost"
 										size="icon"
-										className="h-9 w-9 rounded-none border-l border-input"
+										className="text-muted h-9 w-9 rounded-none border-l border-input"
 										onClick={() =>
 											setQuantity((q) => Math.min(product.stock, q + 1))
 										}
